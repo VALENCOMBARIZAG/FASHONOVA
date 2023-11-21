@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FashoN🦋va</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+ 
+</head>
+<body>
+  <!-- Barra de navegación -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="navbar-brand mr-auto">
+      <a href="#">
+        <img src="img/mariposaMonarca.jpg" alt="Logo" class="logo" height="40">
+      </a>
+    </div>
+    <ul class="navbar-nav">
+      <li class="nav-item"><a href="#" class="nav-link">Inicio</a></li>
+      <li class="nav-item"><a href="#" class="nav-link">Productos</a></li>
+      <li class="nav-item"><a href="#" class="nav-link">Servicios</a></li>
+      <!-- Menú nav -->
+    </ul>
+  </nav>
+    <!-- Botón para dispositivos móviles -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <!-- Enlaces de navegación -->
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Contenido principal -->
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <img src="img/image-1.jpeg" class="card-img-top" alt="Producto 1">
+          <div class="card-body">
+            <h5 class="card-title">Taller Outfit para otoño </h5>
+            <p class="card-text">Agregar</p>
+            <a href="#" class="btn btn-primary">Agregar</a>
+          </div>
+        </div>
+      </div>
+  
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <img src="img/Paris Hilton.webp" class="card-img-top" alt="Producto 2">
+          <div class="card-body">
+            <h5 class="card-title">Taller Mejora tu avatar</h5>
+        <p class="card-text">Descripción del producto 2.</p>
+            <a href="#" class="btn btn-primary">Agregar</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <img src="img/Colorimetria.webp" class="card-img-top" alt="Producto 1">
+          <div class="card-body">
+            <h5 class="card-title">Taller de colorimetria para la piel</h5>
+            <p class="card-text">Descripción del producto 1.</p>
+            <a href="#" class="btn btn-primary">Agregar</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Carrito de compras -->
+  <div id="carrito" class="p-4 border rounded">
+    <h4 class="mb-4">Carrito de Compras</h4>
+    <ul id="lista-productos" class="list-group mb-3">
+      <!-- Aquí se mostrarán los productos -->
+    </ul>
+    <p class="mb-3">Total: <span id="total" class="font-weight-bold">$0</span></p>
+    <button id="vaciar-carrito" class="btn btn-danger btn-block">Vaciar Carrito</button>
+  </div>
+  <!-- Footer -->
+  <footer class="footer bg-dark text-white text-center p-3">
+    <!-- Contenido del footer -->
+  </footer>
+
+  <script src="ruta-al-archivo-js.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+  
+  // Array para almacenar los productos en el carrito
+  let carrito = [];
+
+  // Función para agregar un producto al carrito
+  const agregarAlCarrito = (nombre, precio) => {
+    const producto = {
+      nombre: nombre,
+      precio: precio
+    };
+    carrito.push(producto);
+    actualizarCarrito();
+  };
+
+  // Función para actualizar el contenido del carrito
+  const actualizarCarrito = () => {
+    const listaProductos = document.getElementById('lista-productos');
+    listaProductos.innerHTML = '';
+    let total = 0;
+
+    carrito.forEach((producto) => {
+      const listItem = document.createElement('li');
+      listItem.classList.add('list-group-item');
+      listItem.textContent = `${producto.nombre} - $${producto.precio}`;
+      listaProductos.appendChild(listItem);
+
+      total += producto.precio;
+    });
+
+    const totalElement = document.getElementById('total');
+    totalElement.textContent = `$${total}`;
+  };
+
+  // Función para vaciar el carrito
+  const vaciarCarrito = () => {
+    carrito = [];
+    actualizarCarrito();
+  };
+
+  // Event listeners para los botones "Agregar" de cada taller
+const botonesAgregar = document.querySelectorAll('.btn-primary');
+botonesAgregar.forEach((boton, index) => {
+  boton.addEventListener('click', (event) => {
+    event.preventDefault(); // Evita que el evento predeterminado del botón (por ejemplo, enviar un formulario) se ejecute
+
+    const nombreProducto = boton.parentElement.querySelector('.card-title').textContent;
+    /*Suponiendo que los precios están fijos, sin embargo, redirecciona a una canción*/
+    const precios = [50, 70, 60]; // Estos son precios de ejemplo
+    agregarAlCarrito(nombreProducto, precios[index]); // Agregar el producto al carrito
+
+    // Abrir YouTube para la canción "Si te vienen a contar" de Cartel de Santa en una nueva ventana
+    const youtubeWindow = window.open('https://www.youtube.com/results?search_query=Si+te+vienen+a+contar+Cartel+de+Santa', '_blank');
+    if (youtubeWindow) {
+      youtubeWindow.focus(); // Enfocar la nueva ventana abierta (en caso de bloqueadores de ventanas emergentes)
+    } else {
+      alert('Se bloqueó la apertura de la ventana emergente. Por favor, habilita las ventanas emergentes para ver el video.');
+    }
+  });
+});
+
+  // Event listener para el botón "Vaciar Carrito"
+  document.getElementById('vaciar-carrito').addEventListener('click', vaciarCarrito);
+
+  </script>
+</body>
+</html>
